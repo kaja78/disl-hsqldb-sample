@@ -46,5 +46,8 @@ class R_EMPLOYEE extends TargetTable {
 	@Description('Department average salary.')
 	Amount DEPT_AVG_SALARY
 	
+	@Description('Department average salary of female employees.')
+	Amount FEMALE_AVG_SALARY
+	
 	
 }

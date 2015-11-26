@@ -22,7 +22,7 @@ import org.disl.meta.ColumnMapping
 import org.disl.sample.dataMapping.common.Subquery
 import org.disl.sample.dataModel.source.DEPARTMENT
 import org.disl.sample.dataModel.source.EMPLOYEE
-
+import static org.disl.sample.dataMapping.library.ExpressionLibrary.*
 class DepartmentSubquery extends Subquery {
 
 	DEPARTMENT dep
@@ -31,6 +31,7 @@ class DepartmentSubquery extends Subquery {
 	ColumnMapping DEPARTMENT_ID=e dep.ID
 	ColumnMapping DEPARTMENT_NAME=e dep.NAME
 	ColumnMapping AVG_SALARY=a "AVG($emp.SALARY)"
+	ColumnMapping FEMALE_AVG_SALARY=a femaleAvg(emp.SEX, emp.SALARY)
 	
 	
 	void initMapping() {

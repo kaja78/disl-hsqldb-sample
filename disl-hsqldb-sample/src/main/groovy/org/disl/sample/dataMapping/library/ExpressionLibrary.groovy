@@ -54,6 +54,32 @@ END)
 """
 	}
 	
+	@Test
+	void testFemaleAvg() {
+		def testData=[
+			[GENDER:"'M'",AMOUNT:20000],
+			[GENDER:"'F'",AMOUNT:25000],
+			[GENDER:"'F'",AMOUNT:21000]]
+		assertExpressionEquals( '23000',  femaleAvg('GENDER','AMOUNT'), testData)
+	}
+	
+	static String femaleAvg(def sexFlag, def amount) {
+		"AVG(${amountForFemale(sexFlag,amount)})"
+	}
+	
+	@Test
+	void testAmountForFemale() {
+		assertExpressionEquals('10000',amountForFemale("'F'", 10000))
+		assertExpressionEquals(null,amountForFemale("'M'", 10000))
+	}
+	
+	static String amountForFemale(def sexFlag,def amount) {
+		"""\
+CASE WHEN $sexFlag='F' THEN
+		$amount
+END
+"""
+	}
 
 	
 }

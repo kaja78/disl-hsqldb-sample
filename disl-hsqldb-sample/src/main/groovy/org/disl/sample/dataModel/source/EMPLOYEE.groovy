@@ -34,7 +34,9 @@ class EMPLOYEE extends SourceTable {
 	List<Map> sampleData=[
 		[ID:'1',DEPARTMENT_ID:'1',NAME:"'John'",LOCATION:"'Prague'",SEX:"'M'",SALARY:'10000'],
 		[ID:'2',DEPARTMENT_ID:'1',NAME:"'Jack'",LOCATION:"'Prague'",SEX:"'M'",SALARY:'11000'],
-		[ID:'3',DEPARTMENT_ID:'2',NAME:"'Marry'",LOCATION:"'Prague'",SEX:"'F'",SALARY:'15000']
+		[ID:'3',DEPARTMENT_ID:'2',NAME:"'Marry'",LOCATION:"'Prague'",SEX:"'F'",SALARY:'15000'],
+		[ID:'4',DEPARTMENT_ID:'2',NAME:"'Jane'",LOCATION:"'Prague'",SEX:"'F'",SALARY:'14000'],
+		[ID:'5',DEPARTMENT_ID:'2',NAME:"'Fred'",LOCATION:"'Prague'",SEX:"'M'",SALARY:'15000']
 		]
 
 }

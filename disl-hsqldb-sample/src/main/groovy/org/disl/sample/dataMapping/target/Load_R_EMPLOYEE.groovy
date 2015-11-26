@@ -41,7 +41,8 @@ class Load_R_EMPLOYEE extends LoadTargetTableMapping {
 	ColumnMapping DEPT_NAME=e dept.DEPARTMENT_NAME
 	ColumnMapping LOCATION=e emp.LOCATION
 	ColumnMapping SALARY=e emp.SALARY
-	ColumnMapping DEPT_AVG_SALARY=e dept.AVG_SALARY	
+	ColumnMapping DEPT_AVG_SALARY=e dept.AVG_SALARY
+	ColumnMapping FEMALE_AVG_SALARY=e dept.FEMALE_AVG_SALARY
 		
 	@Override
 	public void initMapping() {
