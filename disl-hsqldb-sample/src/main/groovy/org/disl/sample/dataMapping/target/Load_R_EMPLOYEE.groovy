@@ -46,11 +46,7 @@ class Load_R_EMPLOYEE extends LoadTargetTableMapping {
 	@Override
 	public void initMapping() {
 		from emp
-		leftOuterJoin(dept) on "$dept.DEPARTMENT_ID=$emp.DEPARTMENT_ID"
+		leftOuterJoin dept on "$dept.DEPARTMENT_ID=$emp.DEPARTMENT_ID"
 	}
 	
-	public static void main(String[] args) {
-		MetaFactory.create(Load_R_EMPLOYEE).simulate()
-	}
-
 }
