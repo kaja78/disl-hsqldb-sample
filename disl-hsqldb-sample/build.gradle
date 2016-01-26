@@ -30,15 +30,13 @@ targetCompatibility = 1.7
 
 mainClassName='org.disl.workflow.DislLauncher'
 
-repositories {
-	mavenLocal() 	
+repositories {	
 	mavenCentral()
-	maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 }
 
 dependencies {
 	compile ('org.codehaus.groovy:groovy-all:2.3.10')
-	compile ('com.github.kaja78:disl:0.3.1-SNAPSHOT')
+	compile ('com.github.kaja78:disl:0.3.1')
 	testCompile ('junit:junit:4.12')
 	runtime ('org.hsqldb:hsqldb:2.3.2')
 }
