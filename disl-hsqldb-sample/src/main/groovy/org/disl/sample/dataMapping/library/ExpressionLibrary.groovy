@@ -24,6 +24,8 @@ import org.junit.Test;
 class ExpressionLibrary extends AbstractDislTestCase {
 
 	static final String NOT_AVAILABLE="'XNA'"
+	static final String FEMALE_CODE="'F'"
+	static final String MALE_CODE="'M'"
 	
 	@Test
 	void testNvlXNA() {
@@ -44,13 +46,27 @@ class ExpressionLibrary extends AbstractDislTestCase {
 	
 	static String decodeSex(def sexFlag) {
 		"""\
-TRIM(CASE WHEN $sexFlag='M' THEN
+TRIM(CASE WHEN $sexFlag=$MALE_CODE THEN
 		'Male'
-WHEN $sexFlag='F' THEN
+WHEN $sexFlag=$FEMALE_CODE THEN
 		'Female'
 ELSE
 		$NOT_AVAILABLE
 END)
+"""
+	}
+
+	@Test
+	void testAmountForFemale() {
+		assertExpressionEquals('10000',amountForFemale("'F'", 10000))
+		assertExpressionEquals(null,amountForFemale("'M'", 10000))
+	}
+	
+	static String amountForFemale(def sexFlag,def amount) {
+		"""\
+CASE WHEN $sexFlag=$FEMALE_CODE THEN
+		$amount
+END
 """
 	}
 	
@@ -66,20 +82,5 @@ END)
 	static String femaleAvg(def sexFlag, def amount) {
 		"AVG(${amountForFemale(sexFlag,amount)})"
 	}
-	
-	@Test
-	void testAmountForFemale() {
-		assertExpressionEquals('10000',amountForFemale("'F'", 10000))
-		assertExpressionEquals(null,amountForFemale("'M'", 10000))
-	}
-	
-	static String amountForFemale(def sexFlag,def amount) {
-		"""\
-CASE WHEN $sexFlag='F' THEN
-		$amount
-END
-"""
-	}
-
 	
 }

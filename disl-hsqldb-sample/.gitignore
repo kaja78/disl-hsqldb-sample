@@ -1,9 +1,5 @@
+**/.*
 /bin/
 /build/
-/.classpath
-/.project
 /gradle-app.setting
-/.settings/
-/.gradle/
-/.idea/
 /disl.iml
