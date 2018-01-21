@@ -30,7 +30,7 @@ targetCompatibility = 1.7
 
 mainClassName='org.disl.workflow.DislLauncher'
 
-repositories {	
+repositories {
 	mavenCentral()
 }
 
@@ -53,4 +53,32 @@ task sourcesJar(type: Jar, dependsOn: classes) {
  
 artifacts {
 	archives sourcesJar
+}
+
+task deployDataModel (type:JavaExec) {
+	group 'disl'
+	main=mainClassName
+	classpath = sourceSets.main.runtimeClasspath
+	args=['org.disl.sample.dataModel.DeployDataModel']
+}
+
+task loadTargetTables (type:JavaExec) {
+	group 'disl'
+	main=mainClassName
+	classpath = sourceSets.main.runtimeClasspath
+	args=['org.disl.sample.dataMapping.LoadTargetTables']
+}
+
+task startDb (type:JavaExec) {
+	group 'disl'
+	main='org.hsqldb.server.Server'
+	classpath = sourceSets.main.runtimeClasspath
+	args=['--database.0','mem:xdb','--dbname.0','hsqldb']
+}
+
+task startDbClient (type:JavaExec) {
+	group 'disl'
+	main='org.hsqldb.util.DatabaseManagerSwing'
+	classpath = sourceSets.main.runtimeClasspath
+	args=['--url','jdbc:hsqldb:hsql://localhost/hsqldb']
 }
