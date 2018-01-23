@@ -18,6 +18,8 @@
  */
 package org.disl.sample.dataMapping.common
 
+import org.disl.meta.Context
+import org.disl.util.jenkins.JobJUnitFormat
 import org.disl.workflow.Job
 import org.junit.Test
 
@@ -26,5 +28,11 @@ abstract class AbstractJob extends Job {
 	@Test
 	void testSimulate() {
 		simulate()
+	}
+
+	@Override
+	void postExecute() {
+		super.postExecute()
+		new JobJUnitFormat(job: this).save()
 	}
 }

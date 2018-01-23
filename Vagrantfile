@@ -20,6 +20,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.network "forwarded_port", guest: 8080, host: 8080, host_ip: "127.0.0.1"
   config.vm.network "forwarded_port", guest: 9001, host: 9001, host_ip: "127.0.0.1"
+  config.vm.network "forwarded_port", guest: 1313, host: 1313, host_ip: "127.0.0.1"
 
   config.vm.synced_folder ".", "/vagrant"
 
@@ -27,12 +28,17 @@ Vagrant.configure("2") do |config|
   config.vm.provision "docker" do |d|
       d.build_image "/vagrant/jenkins",
             args: "-t disl-hsqldb-sample/jenkins"
-      d.run "disl-hsqldb-sample/jenkins",
-            name: "jenkins",
-            args: "-v /vagrant:/var/disl-hsqldb-sample --net=host"
+      d.build_image "/vagrant/hugo",
+                  args: "-t disl-hsqldb-sample/hugo"
+
+      #Hypersonic SQL database server. JDBC URL: hsql://localhost/hsqldb
       d.run "blacklabelops/hsqldb:latest",
             name: "db",
             args: "-e HSQLDB_DATABASE_ALIAS=hsqldb --net=host"
+
+      d.run "disl-hsqldb-sample/jenkins",
+            name: "jenkins",
+            args: "-v /vagrant:/var/disl-hsqldb-sample --net=host"
     end
 
     # Restart jenkins container for every vagrant up.

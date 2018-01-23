@@ -36,9 +36,10 @@ repositories {
 
 dependencies {
 	compile ('org.codehaus.groovy:groovy-all:2.3.10')
-	compile ('com.github.kaja78:disl:0.3.1')
+	compile ('com.github.kaja78:disl:1.0.1')
 	testCompile ('junit:junit:4.12')
 	runtime ('org.hsqldb:hsqldb:2.3.2')
+	runtime 'org.slf4j:slf4j-simple:1.7.21'
 }
 
 license { 
@@ -62,6 +63,13 @@ task deployDataModel (type:JavaExec) {
 	args=['org.disl.sample.dataModel.DeployDataModel']
 }
 
+task generateDocumentation (type:JavaExec) {
+	group 'disl'
+	main=mainClassName
+	classpath = sourceSets.main.runtimeClasspath
+	args=['org.disl.sample.scripts.generateDocumentation']
+}
+
 task loadTargetTables (type:JavaExec) {
 	group 'disl'
 	main=mainClassName
@@ -69,7 +77,7 @@ task loadTargetTables (type:JavaExec) {
 	args=['org.disl.sample.dataMapping.LoadTargetTables']
 }
 
-task startDb (type:JavaExec) {
+task startLocalDb (type:JavaExec) {
 	group 'disl'
 	main='org.hsqldb.server.Server'
 	classpath = sourceSets.main.runtimeClasspath

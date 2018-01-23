@@ -13,10 +13,28 @@
   <concurrentBuild>false</concurrentBuild>
   <customWorkspace>/var/disl-hsqldb-sample</customWorkspace>
   <builders>
-    <hudson.tasks.Shell>
-      <command>gradle loadTargetTables</command>
-    </hudson.tasks.Shell>
+    <hudson.plugins.gradle.Gradle plugin="gradle@1.28">
+      <switches></switches>
+      <tasks>loadTargetTables</tasks>
+      <rootBuildScriptDir></rootBuildScriptDir>
+      <buildFile></buildFile>
+      <gradleName>(Default)</gradleName>
+      <useWrapper>false</useWrapper>
+      <makeExecutable>false</makeExecutable>
+      <useWorkspaceAsHome>false</useWorkspaceAsHome>
+      <wrapperLocation></wrapperLocation>
+      <passAllAsSystemProperties>false</passAllAsSystemProperties>
+      <projectProperties></projectProperties>
+      <passAllAsProjectProperties>false</passAllAsProjectProperties>
+    </hudson.plugins.gradle.Gradle>
   </builders>
-  <publishers/>
+  <publishers>
+    <hudson.tasks.junit.JUnitResultArchiver plugin="junit@1.23">
+      <testResults>build/test-results/*.xml</testResults>
+      <keepLongStdio>false</keepLongStdio>
+      <healthScaleFactor>1.0</healthScaleFactor>
+      <allowEmptyResults>false</allowEmptyResults>
+    </hudson.tasks.junit.JUnitResultArchiver>
+  </publishers>
   <buildWrappers/>
 </project>

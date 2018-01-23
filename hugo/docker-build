@@ -1,0 +1,1 @@
+docker build -t disl-hsqldb-sample/hugo .
