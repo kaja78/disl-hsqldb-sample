@@ -10,10 +10,12 @@ Sample project demonstrating basic features of DISL.
 git clone https://github.com/kaja78/disl-hsqldb-sample.git
 cd disl-hsqldb-sample
 ```
-4. Start development environment. `vagrant up`
-5. Run jobs from [Jenkins](http://localhost:8080).
-6. Run queries in development database. `gradlew startDbClient`
-7. Modify project and rerun jobs from [Jenkins](http://localhost:8080). 
+4. Build documentation site `gradlew buildDislDoc`
+5. Start development environment. `vagrant up`
+6. Run jobs from [Jenkins](http://localhost:8080).
+7. Run queries in development database. `gradlew startDbClient`
+8. Modify project and rerun jobs from [Jenkins](http://localhost:8080).
+9. Browse project [documentation site](http://localhost:1313). 
     
     
 

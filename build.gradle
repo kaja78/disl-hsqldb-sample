@@ -63,19 +63,6 @@ task deployDataModel (type:JavaExec) {
 	args=['org.disl.sample.dataModel.DeployDataModel']
 }
 
-task generateDocumentation (type:JavaExec) {
-	group 'disl-doc'
-	main=mainClassName
-	classpath = sourceSets.main.runtimeClasspath
-	args=['org.disl.sample.scripts.generateDocumentation']
-}
-
-task copyDocumentation(type: Copy, dependsOn: 'generateDocumentation') {
-	group 'disl-doc'
-	from 'build/wiki'
-	into 'hugo/site'
-}
-
 task loadTargetTables (type:JavaExec) {
 	group 'disl'
 	main=mainClassName
@@ -105,9 +92,20 @@ task startLocalHugoServer {
 	}
 }
 
-task restartHugoContainer {
+task restartVagrantHugoContainer {
 	group = 'disl-doc'
 	doLast {
 		'cmd /c vagrant ssh -c "docker restart hugo"'.execute()
 	}
+}
+
+task generateDislDoc (type:JavaExec) {
+	main=mainClassName
+	classpath = sourceSets.main.runtimeClasspath
+	args=['org.disl.sample.scripts.generateDocumentation']
+}
+
+task buildDislDoc(type: Copy, dependsOn: 'generateDislDoc') {
+	from 'build/wiki'
+	into 'hugo/site'
 }
