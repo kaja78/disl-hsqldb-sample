@@ -96,3 +96,18 @@ task startDbClient (type:JavaExec) {
 	classpath = sourceSets.main.runtimeClasspath
 	args=['--url','jdbc:hsqldb:hsql://localhost/hsqldb']
 }
+
+task startLocalHugoServer {
+	group = 'disl-doc'
+	doLast {
+		'cmd /c start /d "./hugo/site" cmd /c hugo server -p 1212 --noHTTPCache'.execute()
+		'cmd /c start http://localhost:1212'.execute()
+	}
+}
+
+task restartHugoContainer {
+	group = 'disl-doc'
+	doLast {
+		'cmd /c vagrant ssh -c "docker restart hugo"'.execute()
+	}
+}

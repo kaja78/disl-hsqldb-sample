@@ -18,17 +18,32 @@
  */
 package org.disl.sample.dataModel.source
 
+import org.disl.meta.Description
+import org.disl.meta.ForeignKey
 import org.disl.sample.dataModel.common.SourceTable
 import org.disl.sample.dataModel.domains.Amount
 import org.disl.sample.dataModel.domains.Id
 import org.disl.sample.dataModel.domains.Name
 
+@Description('Employee source table.')
 class EMPLOYEE extends SourceTable {
+	@Description('Employee Id.')
 	Id ID
+
+	@Description('Department id.')
+	@ForeignKey(targetTable = DEPARTMENT)
 	Id DEPARTMENT_ID
+
+	@Description('Employee name.')
 	Name NAME
+
+	@Description('Employee name.')
 	Name LOCATION
+
+	@Description('Sex flag. F - female, M - male.')
 	Name SEX
+
+	@Description('Monthly salary.')
 	Amount SALARY
 	
 	List<Map> sampleData=[

@@ -18,6 +18,8 @@
  */
 package org.disl.sample.dataMapping.target
 
+import org.disl.meta.Description
+
 import static org.disl.sample.dataMapping.library.ExpressionLibrary.*
 
 import org.disl.meta.ColumnMapping
@@ -28,6 +30,7 @@ import org.disl.sample.dataModel.target.R_EMPLOYEE
 import org.junit.Assert
 import org.junit.Test
 
+@Description('Load R_EMPLOYEE denormalized table.')
 class Load_R_EMPLOYEE extends LoadTargetTableMapping {
 	
 	R_EMPLOYEE target

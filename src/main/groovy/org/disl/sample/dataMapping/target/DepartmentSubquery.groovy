@@ -19,10 +19,12 @@
 package org.disl.sample.dataMapping.target
 
 import org.disl.meta.ColumnMapping
+import org.disl.meta.Description
 import org.disl.sample.dataMapping.common.Subquery
 import org.disl.sample.dataModel.source.DEPARTMENT
 import org.disl.sample.dataModel.source.EMPLOYEE
 
+@Description('Department measures calculation subquery.')
 class DepartmentSubquery extends Subquery {
 
 	DEPARTMENT dep

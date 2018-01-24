@@ -46,11 +46,12 @@ Vagrant.configure("2") do |config|
                   cmd: "server --bind=0.0.0.0 --disableFastRender"
     end
 
-    # Restart jenkins container for every vagrant up.
-    # Jenkins container contains volume mapped to VirtualBox synced folder.
-    # Which is not available in time starting docker daemon during vagrant box boot process.
+    # Restart containers using volume mapping to VirtualBox synced folder for every vagrant up.
+    # Synced folder are not available in time starting docker daemon during vagrant box boot process.
     # This is required for subsequents start of vagrant box (reload, halt & up.).
+
     config.vm.provision "shell", inline: "docker restart jenkins", run: "always"
+    config.vm.provision "shell", inline: "docker restart hugo", run: "always"
 
 
 end

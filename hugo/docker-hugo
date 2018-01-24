@@ -1,1 +1,1 @@
-docker run --rm -ti --name hugo -v $(pwd)/site:/site -w /site --net=host disl-hsqldb-sample/hugo server --bind=0.0.0.0 --disableFastRender
+docker run --rm -ti -v $(pwd)/site:/site -w /site --net=host disl-hsqldb-sample/hugo server --bind=0.0.0.0 --disableFastRender -w

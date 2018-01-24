@@ -24,6 +24,7 @@ import org.disl.sample.dataModel.domains.Amount
 import org.disl.sample.dataModel.domains.Id
 import org.disl.sample.dataModel.domains.Name
 
+@Description('Employee target denormalized table.')
 class R_EMPLOYEE extends TargetTable {
 	@Description('Employee id.')	
 	Id EMP_ID

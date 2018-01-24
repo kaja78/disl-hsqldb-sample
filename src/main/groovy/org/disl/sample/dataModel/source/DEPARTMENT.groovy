@@ -20,18 +20,23 @@ package org.disl.sample.dataModel.source
 
 import org.disl.meta.Column
 import org.disl.meta.DataType
-import org.disl.sample.dataModel.common.SourceTable;
+import org.disl.meta.Description
+import org.disl.meta.PrimaryKey
+import org.disl.sample.dataModel.common.SourceTable
 
+@Description('Department source table.')
 class DEPARTMENT extends SourceTable {
 	
 	List<Map> sampleData=[
 		[ID:'1',NAME:"'Controlling'"],
 		[ID:'2',NAME:"'Finance'"]
 		]
-	
+	@PrimaryKey
+	@Description('Department id.')
 	@DataType('VARCHAR(10)')
 	Column ID
-	
+
+	@Description('Department name.')
 	@DataType('VARCHAR(50)')
 	Column NAME
 }
