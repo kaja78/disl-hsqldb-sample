@@ -64,10 +64,16 @@ task deployDataModel (type:JavaExec) {
 }
 
 task generateDocumentation (type:JavaExec) {
-	group 'disl'
+	group 'disl-doc'
 	main=mainClassName
 	classpath = sourceSets.main.runtimeClasspath
 	args=['org.disl.sample.scripts.generateDocumentation']
+}
+
+task copyDocumentation(type: Copy, dependsOn: 'generateDocumentation') {
+	group 'disl-doc'
+	from 'build/wiki'
+	into 'hugo/site'
 }
 
 task loadTargetTables (type:JavaExec) {

@@ -1,2 +1,0 @@
- echo  -v $(pwd)/../build/wiki/content:/site/content
- docker run --rm -ti --name hugo -v $(pwd)/site:/site -v $(pwd)/../build/wiki/static/data-mapping:/site/static/data-mapping -v $(pwd)/../build/wiki/content/data-mapping:/site/content/data-mapping -v $(pwd)/../build/wiki/content/data-model:/site/content/data-model --entrypoint /bin/sh disl-hsqldb-sample/hugo

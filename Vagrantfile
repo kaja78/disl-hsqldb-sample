@@ -39,6 +39,11 @@ Vagrant.configure("2") do |config|
       d.run "disl-hsqldb-sample/jenkins",
             name: "jenkins",
             args: "-v /vagrant:/var/disl-hsqldb-sample --net=host"
+
+      d.run "disl-hsqldb-sample/hugo",
+                  name: "hugo",
+                  args: "-v /vagrant/hugo/site:/site -w /site --net=host",
+                  cmd: "server --bind=0.0.0.0 --disableFastRender"
     end
 
     # Restart jenkins container for every vagrant up.
