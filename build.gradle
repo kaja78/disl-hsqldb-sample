@@ -44,6 +44,7 @@ dependencies {
 
 license { 
 	header rootProject.file('HEADER.txt')
+	skipExistingHeaders = true
 	ext.year = Calendar.getInstance().get(Calendar.YEAR)
 }
 
