@@ -1,0 +1,1 @@
+ docker run --rm -ti --name jenkins -v /vagrant:/var/disl-hsqldb-sample --net host disl-hsqldb-sample/jenkins

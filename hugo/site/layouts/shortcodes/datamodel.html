@@ -1,0 +1,76 @@
+<script type="text/javascript" src="/js/vis.js"></script>
+<script src="{{ .Site.BaseURL }}js/jquery-3.2.0.min.js"></script>
+<link href="{{ .Site.BaseURL }}css/vis-network.min.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+    #datamodelNetwork {
+      width: 1000px;
+      height:300px;
+      border: 1px solid lightgray;
+    }
+</style>
+
+<div id="datamodelNetwork"></div>
+
+<script type="text/javascript">
+var datamodelNetworkOptions = {
+   layout:{
+    randomSeed: 0,
+    improvedLayout:true,
+    hierarchical: {
+      enabled:true,
+      levelSeparation: 200,
+      nodeSpacing: 200,
+      treeSpacing: 50,
+      blockShifting: true,
+      edgeMinimization: true,
+      parentCentralization: true,
+      direction: 'DU',        // UD, DU, LR, RL
+      sortMethod: 'directed'   // hubsize, directed
+    },
+   },
+   edges:{
+    smooth: false
+   },
+   physics: {
+    enabled: false,
+    minVelocity: 0.75
+   },
+  interaction:{
+    multiselect: true
+  },
+   interaction:{
+    dragNodes:true,
+    dragView: true,
+    hideEdgesOnDrag: false,
+    hideNodesOnDrag: false,
+    hover: false,
+    hoverConnectedEdges: true,
+    keyboard: {
+      enabled: false,
+      speed: {x: 10, y: 10, zoom: 0.02},
+      bindToWindow: true
+    },
+    multiselect: false,
+    navigationButtons: true,
+    selectable: true,
+    selectConnectedEdges: true,
+    tooltipDelay: 300,
+    zoomView: true
+  }
+};
+
+
+  $.get( "{{ .Site.BaseURL }}data-model/{{ .Get 0 }}", function( data ) {
+        var network = new vis.Network(datamodelNetwork, data, datamodelNetworkOptions);
+        network.on('doubleClick',function (event) {
+            if (event.nodes[0]) {
+					var id=event.nodes[0]
+					$.each(data.nodes,function(index,node){
+						if (node.id==id) {
+							window.location=node.targetUrl
+						}
+					})
+                }
+        })
+  });
+</script>

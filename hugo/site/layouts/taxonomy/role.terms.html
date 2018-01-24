@@ -1,0 +1,21 @@
+{{ partial "header.html" . }}
+
+{{ .Content }}
+
+<table>
+    <tr>
+        <th width="20%">Role</th>
+        <th width="20%">AD skupiny</th>
+    </tr>
+    {{ range $key, $taxonomy := .Site.Taxonomies.roles }}
+    {{ $role := index $.Site.Data.applicationroles $key }}
+    <tr>
+        <td><a href="{{ "/roles/"}}{{ $key | urlize }}"> {{ if $role}}{{ $role.name }}{{ else }}{{ $key }}{{ end }}</a><br>
+        <i>{{ $role.description }}</i>
+        <td>{{ $role.adGroup }}<br>
+        <i>{{ $role.adDescription }}</i></td>
+    </tr>
+    {{ end }}
+</table>
+
+{{ partial "footer.html" . }}

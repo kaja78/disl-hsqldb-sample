@@ -1,0 +1,111 @@
+/*
+ * Copyright 2015 Karel Hübl <karel.huebl@gmail.com>.
+ *
+ * This file is part of disl.
+ *
+ * Disl is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Disl is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+ plugins {
+	 id "com.github.hierynomus.license" version "0.11.0"
+ }
+ 
+apply plugin: 'eclipse'
+apply plugin: 'groovy'
+apply plugin: 'application'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+mainClassName='org.disl.workflow.DislLauncher'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile ('org.codehaus.groovy:groovy-all:2.3.10')
+	compile ('com.github.kaja78:disl:1.0.1')
+	testCompile ('junit:junit:4.12')
+	runtime ('org.hsqldb:hsqldb:2.3.2')
+	runtime 'org.slf4j:slf4j-simple:1.7.21'
+}
+
+license { 
+	header rootProject.file('HEADER.txt')
+	ext.year = Calendar.getInstance().get(Calendar.YEAR)
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+	classifier 'sources'
+	from sourceSets.main.allSource
+}
+ 
+artifacts {
+	archives sourcesJar
+}
+
+task deployDataModel (type:JavaExec) {
+	group 'disl'
+	main=mainClassName
+	classpath = sourceSets.main.runtimeClasspath
+	args=['org.disl.sample.dataModel.DeployDataModel']
+}
+
+task loadTargetTables (type:JavaExec) {
+	group 'disl'
+	main=mainClassName
+	classpath = sourceSets.main.runtimeClasspath
+	args=['org.disl.sample.dataMapping.LoadTargetTables']
+}
+
+task startLocalDb (type:JavaExec) {
+	group 'disl'
+	main='org.hsqldb.server.Server'
+	classpath = sourceSets.main.runtimeClasspath
+	args=['--database.0','mem:xdb','--dbname.0','hsqldb']
+}
+
+task startDbClient (type:JavaExec) {
+	group 'disl'
+	main='org.hsqldb.util.DatabaseManagerSwing'
+	classpath = sourceSets.main.runtimeClasspath
+	args=['--url','jdbc:hsqldb:hsql://localhost/hsqldb']
+}
+
+task startLocalHugoServer {
+	group = 'disl-doc'
+	doLast {
+		'cmd /c start /d "./hugo/site" cmd /c hugo server -p 1212 --noHTTPCache'.execute()
+		'cmd /c start http://localhost:1212'.execute()
+	}
+}
+
+task restartVagrantHugoContainer {
+	group = 'disl-doc'
+	doLast {
+		'cmd /c vagrant ssh -c "docker restart hugo"'.execute()
+	}
+}
+
+task generateDislDoc (type:JavaExec) {
+	main=mainClassName
+	classpath = sourceSets.main.runtimeClasspath
+	args=['org.disl.sample.scripts.generateDocumentation']
+}
+
+task buildDislDoc(type: Copy, dependsOn: 'generateDislDoc') {
+	from 'build/wiki'
+	into 'hugo/site'
+}

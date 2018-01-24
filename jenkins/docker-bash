@@ -1,0 +1,1 @@
+docker run --rm -ti -v /vagrant:/var/disl-hsqldb-sample --volumes-from hugo disl-hsqldb-sample/jenkins bash

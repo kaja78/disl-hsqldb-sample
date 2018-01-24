@@ -1,0 +1,17 @@
+{{ partial "header.html" . }}
+
+{{ .Content }}
+
+
+  {{ range sort .Paginator.Pages }}
+    <li><a href="{{ .Permalink }}">{{ .Title }}</a> {{ .Summary | plainify | safeHTML}}</li>
+
+    {{ if .Params.tags }}
+      {{ partial "tags" .Params.tags }}
+    {{ end }}
+  {{ end }}
+  {{ partial "pagination.html" . }}
+
+
+
+{{ partial "footer.html" . }}
