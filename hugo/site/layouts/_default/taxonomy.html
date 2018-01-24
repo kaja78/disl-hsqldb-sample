@@ -1,0 +1,15 @@
+{{ partial "header.html" . }}
+
+{{ .Content }}
+
+
+{{ range .Data.Pages.ByTitle }}
+<li>
+    <a href="{{ .Permalink | safeURL }}">{{ .Title }}</a>{{ if .Summary}} - {{ .Summary | plainify | safeHTML }} {{ end }}
+</li>
+{{ end }}
+
+
+
+
+{{ partial "footer.html" . }}

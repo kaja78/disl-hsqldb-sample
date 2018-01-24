@@ -1,0 +1,19 @@
+/bin/
+/build/
+/.classpath
+/.project
+/gradle-app.setting
+/.settings/
+/.gradle/
+/.idea/
+/disl.iml
+/.vagrant
+#Ignore generated site folders
+/hugo/site/content/data-mapping/
+/hugo/site/content/data-model/
+/hugo/site/static/data-mapping/
+/hugo/site/static/data-model/
+/hugo/site/public/
+
+
+

@@ -1,0 +1,57 @@
+languageCode = "en-us"
+title = "disl-hsqldb-sample"
+baseurl = "http://localhost:1313"
+#RelativeURLs = true
+
+#uglyURLs = true
+#preserveTaxonomyNames = true
+
+buildDrafts = true
+theme = "crab"
+
+[params]
+description = "Documentation site"
+
+[permalinks]
+blog  = "/blog/:year/:month/:title/"
+
+[taxonomies]
+tag = "tags"
+schema = "schemas"
+package = "packages"
+
+[[menu.main]]
+weight = 1
+name = "Home"
+url = "/"
+
+
+[[menu.main]]
+weight = 4
+name = "DISL Model"
+identifier = "disldoc"
+
+    [[menu.main]]
+    parent = "disldoc"
+    weight = 10
+    name = "Data model"
+    url = "/data-model"
+
+    [[menu.main]]
+    parent = "disldoc"
+    weight = 20
+    name = "Mapping"
+    url = "/data-mapping"
+
+    [[menu.main]]
+    parent = "disldoc"
+    weight = 30
+    name = "Logical schema"
+    url = "/schemas"
+
+    [[menu.main]]
+    parent = "disldoc"
+    weight = 40
+    name = "Package"
+    url = "/packages"
+

@@ -1,0 +1,11 @@
+  {{ partial "header.html" . }}
+  {{ .Content }}
+{{ range .Site.Taxonomies.tags.home }}
+  <h2><a href="{{ .Page.Permalink | safeURL }}">{{ .Page.Title }}</a></h2>
+  <div class="content">
+  {{ .Page.Summary | plainify | safeHTML }}
+  </div>
+  {{ partial "tags" .Page.Params.tags }}
+{{ end }}
+
+{{ partial "footer.html" . }}
