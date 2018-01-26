@@ -17,7 +17,7 @@ cd disl-hsqldb-sample
 8. Modify project and rerun jobs from [Jenkins](http://localhost:8080).
 9. Browse project [documentation site](http://localhost:1313). 
     
-![disl-hsqldb-sample development environment provisioned by Vagrant](disl-vagrant-box.jpg)    
+![disl-hsqldb-sample development environment provisioned by Vagrant](disl-vagrant-box.png)    
 
 ### Vagrant commands
 
