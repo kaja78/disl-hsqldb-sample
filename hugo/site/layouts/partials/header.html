@@ -2,10 +2,25 @@
 <html>
   <head>
     <title>{{ .Title }} - {{ .Site.Title }}</title>
-    <link rel="stylesheet" href="{{ .Site.BaseURL }}css/crab.css">
+    <link rel="stylesheet" href="/css/crab.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0">
     {{ .Hugo.Generator }}
+    <script src="/vis/vis-network.min.js"></script>
+    <script src="/js/jquery-3.2.0.min.js"></script>
+    <link href="/vis/vis-network.min.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+    #datamodelNetwork {
+      width: 1000px;
+      height:300px;
+      border: 1px solid lightgray;
+    }
+    #lineageNetwork {
+      width: 1000px;
+      height:300px;
+      border: 1px solid lightgray;
+    }
+</style>
   </head>
   <body>
 

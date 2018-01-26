@@ -1,7 +1,7 @@
 languageCode = "en-us"
 title = "disl-hsqldb-sample"
 baseurl = "http://localhost:1313"
-#RelativeURLs = true
+RelativeURLs = true
 
 #uglyURLs = true
 #preserveTaxonomyNames = true

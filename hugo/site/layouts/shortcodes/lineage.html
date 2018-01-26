@@ -1,21 +1,9 @@
-<script type="text/javascript" src="/js/vis.js"></script>
-<script src="/js/jquery-3.2.0.min.js"></script>
-<link href="/css/vis-network.min.css" rel="stylesheet" type="text/css" />
-<style type="text/css">
-    #lineageNetwork {
-      width: 1000px;
-      height:90vh;
-      border: 1px solid lightgray;
-    }
-</style>
-
 <div id="lineageNetwork"></div>
-
 <script type="text/javascript">
 var options = {
    layout:{
     randomSeed: 0,
-    improvedLayout:false,
+    improvedLayout:true,
     hierarchical: {
       enabled:true,
       levelSeparation: 400,
@@ -36,20 +24,25 @@ var options = {
     minVelocity: 0.75
    },
   interaction:{
-    multiselect: true
+    multiselect: false,
+    navigationButtons: true,
+    selectable: true,
+    selectConnectedEdges: true,
+    tooltipDelay: 300,
+    zoomView: true
   }
 };
 
 
 
-  $.get( "/data-mapping/{{ .Get 0 }}", function( data ) {
+  $.get( "{{ .Site.BaseURL }}data-mapping/{{ .Get 0 }}", function( data ) {
         var network = new vis.Network(lineageNetwork, data, options);
         network.on('doubleClick',function (event) {
             if (event.nodes[0]) {
 					var id=event.nodes[0]
 					$.each(data.nodes,function(index,node){
 						if (node.id==id) {
-							window.location=node.targetUrl
+							window.location='{{ .Site.BaseURL }}'+node.targetUrl
 						}
 					})
                 }

@@ -1,16 +1,4 @@
-<script type="text/javascript" src="/js/vis.js"></script>
-<script src="{{ .Site.BaseURL }}js/jquery-3.2.0.min.js"></script>
-<link href="{{ .Site.BaseURL }}css/vis-network.min.css" rel="stylesheet" type="text/css" />
-<style type="text/css">
-    #datamodelNetwork {
-      width: 1000px;
-      height:300px;
-      border: 1px solid lightgray;
-    }
-</style>
-
 <div id="datamodelNetwork"></div>
-
 <script type="text/javascript">
 var datamodelNetworkOptions = {
    layout:{
@@ -67,7 +55,7 @@ var datamodelNetworkOptions = {
 					var id=event.nodes[0]
 					$.each(data.nodes,function(index,node){
 						if (node.id==id) {
-							window.location=node.targetUrl
+							window.location='{{ .Site.BaseURL }}'+node.targetUrl
 						}
 					})
                 }
