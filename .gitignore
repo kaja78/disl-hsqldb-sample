@@ -5,8 +5,7 @@
 /gradle-app.setting
 /.settings/
 /.gradle/
-/.idea/
-/disl.iml
+/*.iml
 /.vagrant
 #Ignore generated site folders
 /hugo/site/content/data-mapping/
@@ -14,6 +13,5 @@
 /hugo/site/static/data-mapping/
 /hugo/site/static/data-model/
 /hugo/site/public/
-
-
-
+/.idea/**/*.xml
+/.idea/**/*.iml
