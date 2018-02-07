@@ -1,1 +1,0 @@
-docker run --rm -ti --name hugo -v $(pwd)/site:/site --entrypoint /bin/sh disl-hsqldb-sample/hugo

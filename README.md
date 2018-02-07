@@ -15,7 +15,7 @@ cd disl-hsqldb-sample
 6. Run jobs from [Jenkins](http://localhost:8080).
 7. Run queries in development database. `gradlew startDbClient`
 8. Modify project and rerun jobs from [Jenkins](http://localhost:8080).
-9. Browse project [documentation site](http://localhost:1313). 
+9. Browse project [documentation site](http://localhost/).
     
 ![disl-hsqldb-sample development environment provisioned by Vagrant](disl-vagrant-box.png)    
 

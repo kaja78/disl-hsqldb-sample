@@ -86,34 +86,30 @@ task startDbClient (type:JavaExec) {
 }
 
 task startLocalHugoServer {
-	group = 'disl-doc'
+	group = 'documentation'
 	doLast {
-		'cmd /c start /d "./hugo/site" cmd /c hugo server -p 1212 --baseUrl=http://localhost:1212/site/ --noHTTPCache'.execute()
+		'cmd /c start /d "./site" cmd /c hugo server -p 1212 --baseUrl=http://localhost:1212/site/ --noHTTPCache'.execute()
 		'cmd /c start http://localhost:1212/site'.execute()
 	}
 }
 
 task generateGithubSite {
-	group = 'disl-doc'
+	group = 'documentation'
 	doLast {
 		'hugo --baseUrl=https://kaja78.github.com/site-hsqldb-sample/'.execute(null,new File('./hugo/site'))
 	}
 }
 
-task restartVagrantHugoContainer {
-	group = 'disl-doc'
-	doLast {
-		'cmd /c vagrant ssh -c "docker restart hugo"'.execute()
-	}
-}
-
-task generateDislDoc (type:JavaExec) {
-	main=mainClassName
-	classpath = sourceSets.main.runtimeClasspath
+task updateSite (type:JavaExec){
+	description = 'Update site folder with generated content.'
+	main = 'org.disl.workflow.DislLauncher'
 	args=['org.disl.sample.scripts.generateDocumentation']
+	classpath = sourceSets.main.runtimeClasspath
 }
 
-task buildDislDoc(type: Copy, dependsOn: 'generateDislDoc') {
-	from 'build/wiki'
-	into 'hugo/site'
+task disldoc(dependsOn: 'updateSite') {
+	group = 'documentation'
+	doLast {
+		'hugo -s site -d ../build/site'.execute()
+	}
 }

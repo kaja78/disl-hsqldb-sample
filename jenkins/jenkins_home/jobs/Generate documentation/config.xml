@@ -15,7 +15,7 @@
   <builders>
     <hudson.plugins.gradle.Gradle plugin="gradle@1.28">
       <switches></switches>
-      <tasks>generateDislDoc</tasks>
+      <tasks>disldoc</tasks>
       <rootBuildScriptDir></rootBuildScriptDir>
       <buildFile></buildFile>
       <gradleName>(Default)</gradleName>

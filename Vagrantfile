@@ -13,6 +13,7 @@ Vagrant.configure("2") do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
   config.vm.box="ailispaw/barge"
+  config.vm.box_version = "2.7.4"
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine and only allow access
@@ -20,7 +21,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.network "forwarded_port", guest: 8080, host: 8080, host_ip: "127.0.0.1"
   config.vm.network "forwarded_port", guest: 9001, host: 9001, host_ip: "127.0.0.1"
-  config.vm.network "forwarded_port", guest: 1313, host: 1313, host_ip: "127.0.0.1"
+  config.vm.network "forwarded_port", guest: 80, host: 80, host_ip: "127.0.0.1"
 
   config.vm.synced_folder ".", "/vagrant"
 
@@ -40,10 +41,9 @@ Vagrant.configure("2") do |config|
             name: "jenkins",
             args: "-v /vagrant:/var/disl-hsqldb-sample --net=host"
 
-      d.run "disl-hsqldb-sample/hugo",
-                  name: "hugo",
-                  args: "-v /vagrant/hugo/site:/site -w /site --net=host",
-                  cmd: "server --bind=0.0.0.0 --disableFastRender"
+      d.run "nginx:1.12-alpine",
+                  name: "nginx",
+                  args: "-v /vagrant/build/site:/usr/share/nginx/html:ro -p 80:80"
     end
 
     # Restart containers using volume mapping to VirtualBox synced folder for every vagrant up.
@@ -51,7 +51,7 @@ Vagrant.configure("2") do |config|
     # This is required for subsequents start of vagrant box (reload, halt & up.).
 
     config.vm.provision "shell", inline: "docker restart jenkins", run: "always"
-    config.vm.provision "shell", inline: "docker restart hugo", run: "always"
+    config.vm.provision "shell", inline: "docker restart nginx", run: "always"
 
 
 end
