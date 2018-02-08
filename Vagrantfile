@@ -29,8 +29,6 @@ Vagrant.configure("2") do |config|
   config.vm.provision "docker" do |d|
       d.build_image "/vagrant/jenkins",
             args: "-t disl-hsqldb-sample/jenkins"
-      d.build_image "/vagrant/hugo",
-                  args: "-t disl-hsqldb-sample/hugo"
 
       #Hypersonic SQL database server. JDBC URL: hsql://localhost/hsqldb
       d.run "blacklabelops/hsqldb:latest",
